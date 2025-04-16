@@ -1,10 +1,18 @@
-import { useAddress, useContract } from "@thirdweb-dev/react";
-import { Web3Button } from "@thirdweb-dev/react";
+import { useAddress, useContract, Web3Button } from "@thirdweb-dev/react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const address = useAddress();
   const { contract } = useContract("YOUR_NFT_DROP_CONTRACT_ADDRESS", "nft-drop");
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // 避免伺服器預渲染錯誤
 
   return (
     <div style={{ padding: 40, fontFamily: 'Arial, sans-serif', backgroundColor: '#f1f5e4', minHeight: '100vh' }}>
